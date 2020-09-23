@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/ennemy.png" type="Texture" id=1]
+[ext_resource path="res://Hurtbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Ennemy.gd" type="Script" id=3]
+[ext_resource path="res://red.shader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+
+[node name="Ennemy" type="Node2D"]
+script = ExtResource( 3 )
+speed = 50
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="CollisionPolygon2D" parent="Hurtbox" index="0"]
+polygon = PoolVector2Array( 0.654676, 9.41012, 2.43647, 7.46128, 4.99781, 7.46128, 11.7909, 0.556811, 17.4704, 7.34991, 20.5885, 4.45449, 21.3124, 5.34539, 21.4238, 14.6441, 20.5329, 15.4237, 17.3033, 12.4726, 12.3477, 19.6555, 4.441, 12.4169, 2.10239, 12.4726, 0.654676, 10.4681 )
+
+[editable path="Hurtbox"]
