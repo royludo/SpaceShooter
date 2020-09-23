@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Hull.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/background_space.png" type="Texture" id=2]
 [ext_resource path="res://Turret.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World.gd" type="Script" id=4]
-[ext_resource path="res://Ennemy.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
@@ -32,9 +31,6 @@ position = Vector2( 2.09568, 143.38 )
 color = "red"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Ennemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 254.563, 48.3847 )
 
 [node name="EnnemySpawnTimer" type="Timer" parent="."]
 wait_time = 1.5
