@@ -37,6 +37,7 @@ color = "red"
 position = Vector2( 254.563, 48.3847 )
 
 [node name="EnnemySpawnTimer" type="Timer" parent="."]
+wait_time = 1.5
 autostart = true
 [connection signal="shoot" from="Turret" to="." method="_on_Turret_shoot"]
 [connection signal="shoot" from="Turret2" to="." method="_on_Turret_shoot"]

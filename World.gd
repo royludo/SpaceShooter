@@ -104,13 +104,42 @@ func laser_timer_out(effect):
 
 func spawn_ennemy_at(y):
 	var ennemy = Ennemy.instance()
-	ennemy.constructor(ennemiesMove)
+	
+	# randomize ennemy stats
+	var speed = ennemy.speed * rand_range(0.5, 1.5)
+	
+	var shieldrand = floor(rand_range(0.0, 4.0))
+	var colorrand = floor(rand_range(0.0, 2.0))
+	var shieldsPresent = [false, false, false]
+	var shieldsColors = ["blue", "blue", "blue"]
+	
+	if shieldrand == 1:
+		shieldsPresent = [false, true, false]
+		if colorrand == 0:
+			shieldsColors = ["blue", "blue", "blue"]
+		else:
+			shieldsColors = ["blue", "red", "blue"]
+	elif shieldrand == 2:
+		shieldsPresent = [true, false, true]
+		if colorrand == 0:
+			shieldsColors = ["blue", "blue", "blue"]
+		else:
+			shieldsColors = ["red", "red", "red"]
+	elif shieldrand == 3:
+		shieldsPresent = [true, true, true]
+		if colorrand == 0:
+			shieldsColors = ["blue", "red", "blue"]
+		else:
+			shieldsColors = ["blue", "red", "blue"]
+	
+	
+	ennemy.constructor(ennemiesMove, speed, shieldsPresent, shieldsColors)
 	#print("spawn at: " + str(y))
 	ennemy.set_position(Vector2(320, y))
 	add_child(ennemy)
 
 func _on_EnnemySpawnTimer_timeout():
-	var ennemyCount = ceil(rand_range(1, 4))
+	var ennemyCount = ceil(rand_range(1, 3))
 	#print("spawn "+str(ennemyCount))
 	for i in range(ennemyCount):
 		if spawnEnnemies:

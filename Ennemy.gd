@@ -6,6 +6,7 @@ var color
 
 const blue_shader = preload("res://blue.shader")
 const red_shader = preload("res://red.shader")
+const ShieldSet = preload("res://ShieldSet.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,8 +16,9 @@ func hit_by(projectile_color):
 	if projectile_color == self.color:
 		queue_free()
 
-func constructor(movementEnabled):
+func constructor(movementEnabled, speed, shieldsPresent, shieldsColors):
 	self.movementEnabled = movementEnabled
+	self.speed = speed
 	
 	if rand_range(0, 1.0) > 0.5:
 		color = "blue"
@@ -24,6 +26,10 @@ func constructor(movementEnabled):
 	else:
 		color = "red"
 		$Sprite.material.shader = red_shader
+	
+	var shields = ShieldSet.instance()
+	shields.constructor(shieldsPresent, shieldsColors)
+	add_child(shields)
 
 func _physics_process(delta):
 	if movementEnabled:
