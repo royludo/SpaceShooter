@@ -93,7 +93,7 @@ func get_all_colliders(raycast:RayCast2D, piercing:int):
 func target_out_of_screen(origin, old_target):
 	var newtarget:Vector2 = old_target - origin
 	var l = newtarget.length()
-	newtarget = newtarget * (400/l)
+	newtarget = newtarget * (500/l)
 	newtarget = origin + newtarget
 	return newtarget
 
@@ -135,7 +135,7 @@ func spawn_ennemy_at(y):
 	
 	ennemy.constructor(ennemiesMove, speed, shieldsPresent, shieldsColors)
 	#print("spawn at: " + str(y))
-	ennemy.set_position(Vector2(320, y))
+	ennemy.set_position(Vector2(480, y))
 	add_child(ennemy)
 
 func _on_EnnemySpawnTimer_timeout():
@@ -143,4 +143,4 @@ func _on_EnnemySpawnTimer_timeout():
 	#print("spawn "+str(ennemyCount))
 	for i in range(ennemyCount):
 		if spawnEnnemies:
-			spawn_ennemy_at(ceil(rand_range(20,160)))
+			spawn_ennemy_at(ceil(rand_range(5,245)))
