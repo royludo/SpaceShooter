@@ -20,9 +20,13 @@ func _input(event):
 	if event.is_action_pressed("fire1"):
 		$Turret.shoot()
 		$Turret2.shoot()
-	elif event.is_action_pressed("fire2"):
 		$Turret3.shoot()
 		$Turret4.shoot()
+	elif event.is_action_pressed("fire2"):
+		$Turret5.shoot()
+		$Turret6.shoot()
+		$Turret7.shoot()
+		$Turret8.shoot()
 		pass
 
 func _on_Turret_shoot(turret:Turret, mouse_pos):
