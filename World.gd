@@ -9,17 +9,12 @@ onready var Ennemy = preload("res://Ennemy.tscn")
 export(bool) var spawnEnnemies
 export(bool) var ennemiesMove
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	
-	#line.points = [orig_pivot_position,  get_viewport().get_mouse_position()]
-	
-	pass
+	#init ennemies with some behavior if they are present on start, for tests
+	for child in get_children():
+		if child.get_name().begins_with("Ennemy") and child is Node2D:
+			child.constructor(ennemiesMove, 0, [true, true, true], \
+			["blue", "blue", "blue"])
 
 func _input(event):
 	if event.is_action_pressed("fire1"):

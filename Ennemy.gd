@@ -1,4 +1,5 @@
 extends Node2D
+class_name Ennemy
 
 export(int) var speed
 var movementEnabled:bool

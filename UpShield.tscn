@@ -1,8 +1,33 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/up_blue.png" type="Texture" id=2]
 [ext_resource path="res://UpShield.gd" type="Script" id=3]
+[ext_resource path="res://assets/up_disappear.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 20, 6 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 20, 0, 20, 6 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 40, 0, 20, 6 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 60, 0, 20, 6 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "ShieldDestroyed",
+"speed": 20.0
+} ]
 
 [node name="UpShield" type="Node2D"]
 script = ExtResource( 3 )
@@ -15,5 +40,16 @@ centered = false
 
 [node name="CollisionPolygon2D" parent="Hurtbox" index="0"]
 polygon = PoolVector2Array( 3, 0, 0, 4, 0, 6, 3, 3, 17, 3, 20, 6, 20, 4, 17, 0 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 5 )
+animation = "ShieldDestroyed"
+centered = false
+__meta__ = {
+"_editor_description_": ""
+}
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 
 [editable path="Hurtbox"]

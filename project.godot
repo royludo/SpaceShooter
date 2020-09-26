@@ -10,11 +10,23 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "AbstractShieldPart",
+"language": "GDScript",
+"path": "res://AbstractShieldPart.gd"
+}, {
+"base": "Node2D",
+"class": "Ennemy",
+"language": "GDScript",
+"path": "res://Ennemy.gd"
+}, {
+"base": "Node2D",
 "class": "Turret",
 "language": "GDScript",
 "path": "res://Sprite.gd"
 } ]
 _global_script_class_icons={
+"AbstractShieldPart": "",
+"Ennemy": "",
 "Turret": ""
 }
 
