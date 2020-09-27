@@ -1,25 +1,42 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/turret2.png" type="Texture" id=1]
 [ext_resource path="res://Sprite.gd" type="Script" id=2]
+[ext_resource path="res://assets/turret_blue_shot_effect.png" type="Texture" id=3]
+[ext_resource path="res://assets/turret_red_shot_effect.png" type="Texture" id=4]
 
 [node name="Turret" type="Node2D"]
 script = ExtResource( 2 )
+shotEffectTime = 0.5
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -15, -15 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="Pivot" type="Node2D" parent="."]
-position = Vector2( 15, 15 )
 
 [node name="Nozzle" type="Node2D" parent="."]
-position = Vector2( 51, 8 )
+position = Vector2( 36, -7 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 51, 8 )
+position = Vector2( 36, -7 )
 enabled = true
 cast_to = Vector2( 500, 0 )
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="BlueShotEffect" type="Sprite" parent="."]
+visible = false
+position = Vector2( -15, -15 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="RedShotEffect" type="Sprite" parent="."]
+visible = false
+position = Vector2( -15, -15 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="ShotEffectTween" type="Tween" parent="."]

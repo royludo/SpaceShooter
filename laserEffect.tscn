@@ -6,14 +6,10 @@
 script = ExtResource( 1 )
 blueColor = Color( 0.160784, 0.611765, 0.968627, 1 )
 redColor = Color( 1, 0.227451, 0.12549, 1 )
+fadeTime = 0.3
 
 [node name="line" type="Line2D" parent="."]
 width = 1.5
 joint_mode = 2
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.3
-one_shot = true
-autostart = true
 
 [node name="Tween" type="Tween" parent="."]

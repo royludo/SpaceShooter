@@ -8,6 +8,7 @@ onready var Ennemy = preload("res://Ennemy.tscn")
 ### debug variables ###
 export(bool) var spawnEnnemies
 export(bool) var ennemiesMove
+export(bool) var customVisualDebug:bool
 
 func _ready():
 	#init ennemies with some behavior if they are present on start, for tests
@@ -37,7 +38,7 @@ func _on_Turret_shoot(turret:Turret, mouse_pos):
 	
 	var effect = LaserEffect.instance()
 	effect.constructor(turret.color)
-	effect.get_node("Timer").connect("timeout", self, "laser_timer_out", [effect])
+	effect.get_node("Tween").connect("tween_completed", self, "laser_timer_out", [effect])
 	
 	var raycast:RayCast2D = turret.get_node("RayCast2D")
 	if raycast.is_colliding():
@@ -59,6 +60,22 @@ func _on_Turret_shoot(turret:Turret, mouse_pos):
 		effect.get_node("line").points = [origin, target_out_of_screen(origin, target)]
 	
 	canvas.add_child(effect)
+
+func _draw():
+	if customVisualDebug:
+		var nozzle_to_pivot = $Turret.global_position - $Turret/Nozzle.global_position
+		var adjusted_mouse_pos = get_viewport().get_mouse_position() + nozzle_to_pivot
+		#draw_line(get_viewport().get_mouse_position(), adjusted_mouse_pos, Color.red)
+		#var angle = $Turret.global_position.angle_to_point(adjusted_mouse_pos)
+		var new_direction = $Turret.global_position.direction_to(adjusted_mouse_pos)
+		new_direction *= $Turret.global_position.distance_to(adjusted_mouse_pos)
+		#draw_circle(get_viewport().get_mouse_position(), 3.0, Color.red)
+		draw_line(get_viewport().get_mouse_position(), adjusted_mouse_pos, Color.red, 1.0)
+		draw_circle(adjusted_mouse_pos, 2.0, Color.red)
+		draw_line($Turret.global_position, $Turret.global_position + new_direction, Color.green, 2.0)
+
+func _process(delta):
+	update() # update debug drawings
 
 # returns ordered array of all colliding ennemies
 # ordered from closest to farthest
@@ -97,9 +114,8 @@ func target_out_of_screen(origin, old_target):
 	return newtarget
 
 
-func laser_timer_out(effect):
+func laser_timer_out(object, key, effect):
 	effect.queue_free()
-	pass
 
 func spawn_ennemy_at(y):
 	var ennemy = Ennemy.instance()
