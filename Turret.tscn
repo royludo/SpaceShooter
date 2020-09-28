@@ -10,17 +10,18 @@ script = ExtResource( 2 )
 shotEffectTime = 0.5
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -15, -15 )
+position = Vector2( -15, -8 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="Pivot" type="Node2D" parent="."]
+position = Vector2( 0, 7 )
 
 [node name="Nozzle" type="Node2D" parent="."]
-position = Vector2( 36, -7 )
+position = Vector2( 36, 0 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 36, -7 )
+position = Vector2( 36, 0 )
 enabled = true
 cast_to = Vector2( 500, 0 )
 collision_mask = 4
@@ -29,13 +30,13 @@ collide_with_bodies = false
 
 [node name="BlueShotEffect" type="Sprite" parent="."]
 visible = false
-position = Vector2( -15, -15 )
+position = Vector2( -15, -8 )
 texture = ExtResource( 3 )
 centered = false
 
 [node name="RedShotEffect" type="Sprite" parent="."]
 visible = false
-position = Vector2( -15, -15 )
+position = Vector2( -15, -8 )
 texture = ExtResource( 4 )
 centered = false
 

@@ -34,7 +34,8 @@ func _on_Turret_shoot(turret:Turret, mouse_pos):
 	#print("shoot " + str(turret)+" "+str(mouse_pos)+" "+turret.color)
 	
 	var origin = turret.get_node("Nozzle").get_global_position()
-	var target = get_viewport().get_mouse_position()
+	var pivot_to_nozzle = origin - turret.global_position
+	var target = get_viewport().get_mouse_position() + pivot_to_nozzle
 	
 	var effect = LaserEffect.instance()
 	effect.constructor(turret.color)
@@ -63,16 +64,24 @@ func _on_Turret_shoot(turret:Turret, mouse_pos):
 
 func _draw():
 	if customVisualDebug:
+		var mouse_pos = get_viewport().get_mouse_position()
 		var nozzle_to_pivot = $Turret.global_position - $Turret/Nozzle.global_position
-		var adjusted_mouse_pos = get_viewport().get_mouse_position() + nozzle_to_pivot
+		var adjusted_mouse_pos = mouse_pos + nozzle_to_pivot
 		#draw_line(get_viewport().get_mouse_position(), adjusted_mouse_pos, Color.red)
 		#var angle = $Turret.global_position.angle_to_point(adjusted_mouse_pos)
 		var new_direction = $Turret.global_position.direction_to(adjusted_mouse_pos)
 		new_direction *= $Turret.global_position.distance_to(adjusted_mouse_pos)
+		
+		var pivot_to_nozzle = $Turret/Nozzle.global_position - $Turret.global_position
+		var pivot_to_mouse = mouse_pos - $Turret.global_position
+	
 		#draw_circle(get_viewport().get_mouse_position(), 3.0, Color.red)
-		draw_line(get_viewport().get_mouse_position(), adjusted_mouse_pos, Color.red, 1.0)
+		draw_line(mouse_pos, adjusted_mouse_pos, Color.red, 1.0)
 		draw_circle(adjusted_mouse_pos, 2.0, Color.red)
 		draw_line($Turret.global_position, $Turret.global_position + new_direction, Color.green, 2.0)
+		draw_line($Turret.global_position, $Turret.global_position - new_direction, Color.blue, 2.0)
+		draw_line($Turret.global_position, $Turret.global_position + pivot_to_nozzle, Color.yellow, 2.0)
+		draw_line($Turret.global_position, $Turret.global_position + pivot_to_mouse, Color.orange, 2.0)
 
 func _process(delta):
 	update() # update debug drawings
