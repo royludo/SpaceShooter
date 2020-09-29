@@ -7,52 +7,64 @@
 [ext_resource path="res://Ennemy.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 4 )
 spawnEnnemies = true
 ennemiesMove = true
 
 [node name="Sprite" type="Sprite" parent="."]
 show_behind_parent = true
+position = Vector2( 0, 20 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="Hull" parent="." instance=ExtResource( 1 )]
 show_behind_parent = true
+position = Vector2( 0, 20 )
 
-[node name="Turret" parent="." instance=ExtResource( 3 )]
+[node name="Turret1" parent="." groups=[
+"Turrets",
+"fire1",
+] instance=ExtResource( 3 )]
 show_behind_parent = true
-position = Vector2( 60, 26 )
+position = Vector2( 60, 40 )
 
-[node name="Turret2" parent="." instance=ExtResource( 3 )]
+[node name="Turret2" parent="." groups=[
+"Turrets",
+"fire1",
+] instance=ExtResource( 3 )]
 show_behind_parent = true
-position = Vector2( 60, 55 )
+position = Vector2( 60, 80 )
 
-[node name="Turret3" parent="." instance=ExtResource( 3 )]
-show_behind_parent = true
-position = Vector2( 60, 87 )
-
-[node name="Turret4" parent="." instance=ExtResource( 3 )]
+[node name="Turret3" parent="." groups=[
+"Turrets",
+"fire1",
+] instance=ExtResource( 3 )]
 show_behind_parent = true
 position = Vector2( 60, 120 )
 
-[node name="Turret5" parent="." instance=ExtResource( 3 )]
+[node name="Turret4" parent="." groups=[
+"Turrets",
+"fire2",
+] instance=ExtResource( 3 )]
 show_behind_parent = true
-position = Vector2( 60, 154 )
+position = Vector2( 60, 160 )
 color = "red"
 
-[node name="Turret6" parent="." instance=ExtResource( 3 )]
+[node name="Turret5" parent="." groups=[
+"Turrets",
+"fire2",
+] instance=ExtResource( 3 )]
 show_behind_parent = true
-position = Vector2( 60, 187 )
+position = Vector2( 60, 200 )
 color = "red"
 
-[node name="Turret7" parent="." instance=ExtResource( 3 )]
+[node name="Turret6" parent="." groups=[
+"Turrets",
+"fire2",
+] instance=ExtResource( 3 )]
 show_behind_parent = true
-position = Vector2( 60, 220 )
-color = "red"
-
-[node name="Turret8" parent="." instance=ExtResource( 3 )]
-show_behind_parent = true
-position = Vector2( 60, 254 )
+position = Vector2( 60, 240 )
 color = "red"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -63,12 +75,10 @@ autostart = true
 
 [node name="Ennemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 337.3, 94.2868 )
-[connection signal="shoot" from="Turret" to="." method="_on_Turret_shoot"]
+[connection signal="shoot" from="Turret1" to="." method="_on_Turret_shoot"]
 [connection signal="shoot" from="Turret2" to="." method="_on_Turret_shoot"]
 [connection signal="shoot" from="Turret3" to="." method="_on_Turret_shoot"]
 [connection signal="shoot" from="Turret4" to="." method="_on_Turret_shoot"]
 [connection signal="shoot" from="Turret5" to="." method="_on_Turret_shoot"]
 [connection signal="shoot" from="Turret6" to="." method="_on_Turret_shoot"]
-[connection signal="shoot" from="Turret7" to="." method="_on_Turret_shoot"]
-[connection signal="shoot" from="Turret8" to="." method="_on_Turret_shoot"]
 [connection signal="timeout" from="EnnemySpawnTimer" to="." method="_on_EnnemySpawnTimer_timeout"]

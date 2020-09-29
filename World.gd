@@ -5,6 +5,8 @@ onready var canvas = $CanvasLayer
 onready var LaserEffect = preload("res://laserEffect.tscn")
 onready var Ennemy = preload("res://Ennemy.tscn")
 
+var weaponGroupManager = WeaponGroupManager.new()
+
 ### debug variables ###
 export(bool) var spawnEnnemies
 export(bool) var ennemiesMove
@@ -16,19 +18,17 @@ func _ready():
 		if child.get_name().begins_with("Ennemy") and child is Node2D:
 			child.constructor(ennemiesMove, 0, [true, true, true], \
 			["blue", "blue", "blue"])
+	
+	# init weapon groups
+	weaponGroupManager.add_group([$Turret1, $Turret2, $Turret3], "fire1")
+	weaponGroupManager.add_group([$Turret4, $Turret5, $Turret6], "fire2")
 
 func _input(event):
 	if event.is_action_pressed("fire1"):
-		$Turret.shoot()
-		$Turret2.shoot()
-		$Turret3.shoot()
-		$Turret4.shoot()
+		weaponGroupManager.get_group_with_action("fire1").shoot()
 	elif event.is_action_pressed("fire2"):
-		$Turret5.shoot()
-		$Turret6.shoot()
-		$Turret7.shoot()
-		$Turret8.shoot()
-		pass
+		weaponGroupManager.get_group_with_action("fire2").shoot()
+
 
 func _on_Turret_shoot(turret:Turret, mouse_pos):
 	#print("shoot " + str(turret)+" "+str(mouse_pos)+" "+turret.color)

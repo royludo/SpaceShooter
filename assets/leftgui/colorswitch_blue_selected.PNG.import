@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/colorswitch_blue_selected.PNG-41cff54e79a6699d52ec4aa90b291938.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/leftgui/colorswitch_blue_selected.PNG"
+dest_files=[ "res://.import/colorswitch_blue_selected.PNG-41cff54e79a6699d52ec4aa90b291938.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
